@@ -3,7 +3,7 @@
 <ul>
 	<% @students.each do |student| %>
 		<li>
-			<span><%= student.email %></span>
+			<span><%= link_to student.email, student_path(student) %></span> |
 			<span><%= student.full_name %></span>
 		</li>
 	<% end %>

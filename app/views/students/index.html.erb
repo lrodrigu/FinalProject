@@ -1,10 +1,16 @@
 <h1>Student List</h1>
 
+<%= link_to "Add new Student", new_student_path %>
+
 <ul>
 	<% @students.each do |student| %>
 		<li>
 			<span><%= link_to student.email, student_path(student) %></span> |
 			<span><%= student.full_name %></span>
+			
+			<span>
+				<%= button_to "Delete", student_path(student), :method=> :delete, :class=> :destroy, :confirm=> "Are you sure?" %>
+			</span>
 		</li>
 	<% end %>
 </ul>

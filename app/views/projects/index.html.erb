@@ -1,6 +1,9 @@
 <h1>Project List</h1>
 
-<%= link_to "Add new Project", new_project_path %>
+
+<% if current_user %>
+	<%= link_to "Add new Project", new_project_path %>
+<% end %>
 
 <%= form_tag("/search", method: :get) do %>
 	<%= label_tag(:search, "Search") %>
@@ -14,9 +17,13 @@
 			
 			<span><%= link_to project.name, project_path(project) %></span>
 
-			<span>
-				<%= button_to "Delete", project_path(project), :method=> :delete, :class=> :destroy, :confirm=> "Are you sure?" %>
-			</span>
+			<% if current_user %>
+				<span>
+					<%= button_to "Delete", project_path(project), :method=> :delete, :class=> :destroy, data: {confirm: "Are you sure?"} %>
+				</span>
+			<% end %>
+
+
 		</li>
 	<% end %>
 </ul>

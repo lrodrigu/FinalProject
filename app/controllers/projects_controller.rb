@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
-	
+	before_action :authorize, except: [:index, :show]
+
 	def index
 		if params[:search].present?
 			@projects = Project.search(params[:search])
@@ -25,8 +26,8 @@ class ProjectsController < ApplicationController
 		@project = Project.new(params[:project])
 
 		if @project.save
-			redirect_to project_path(@project), notice: 'Project was added successfully'
-			
+			flash[:notice] = 'Project saved successfully'
+			redirect_to project_path(@project)
 			#redirect_to projects_path(@project), notice: 'Project was added successfully'
 			#happy path
 		else
@@ -57,11 +58,19 @@ class ProjectsController < ApplicationController
 		@project = Project.find_by_id(params[:id])
 
 		if @project.destroy
-			flash[:notice] = "#{@project.email} was successfully deleted"
+			flash[:notice] = "#{@project.name} was successfully deleted"
 		else
 			flash[:alert] = "There was an error while attempting to delete this project"
 		end
 
 			redirect_to projects_path
 	end
+
+	# private
+
+	# 	def project_params
+	# 		params.require(:project).permit(:name)
+	# 	end
+
+
 end

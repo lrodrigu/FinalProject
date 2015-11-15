@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController
-	
+	before_action :authorize
+
 	def index
 		@students = Student.all
 	end
@@ -61,4 +62,13 @@ class StudentsController < ApplicationController
 
 			redirect_to students_path
 	end
+
+private
+
+
+# def student_params
+# 	params.require(:student).permit(:email, :full_name, :phone, :hero)
+# end
+
+
 end

@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-	before_action :authorize, except: [:index, :show]
+	before_action :authenticate_user!, except: [:index, :show]
 
 	def index
 		if params[:search].present?
@@ -23,7 +23,7 @@ class ProjectsController < ApplicationController
 
 
 	def create
-		@project = Project.new(params[:project])
+		@project = Project.new(project_params)
 
 		if @project.save
 			flash[:notice] = 'Project saved successfully'
@@ -40,7 +40,7 @@ class ProjectsController < ApplicationController
 	def update
 		@project = Project.find_by_id(params[:id])
 		# if project is found
-		if @project.update_attributes(params[:project])
+		if @project.update_attributes(project_params)
 			redirect_to projects_path, notice: 'Project was updated successfully'
 			
 		# call update attributes in project and pass in field valies
@@ -66,11 +66,11 @@ class ProjectsController < ApplicationController
 			redirect_to projects_path
 	end
 
-	# private
+	private
 
-	# 	def project_params
-	# 		params.require(:project).permit(:name)
-	# 	end
+		def project_params
+			params.require(:project).permit(:name, :investor_id)
+		end
 
 
 end

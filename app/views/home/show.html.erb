@@ -1,1 +1,9 @@
-<h1>Welcome to your School Application</h1>
+<h1>Welcome to your Investments Application</h1>
+
+<% if current_user %>
+	<ul>
+		<li><div><%= link_to "Investor List", investors_path %></div></li>
+		<li><div><%= link_to "Project List", projects_path %></div></li>
+	</ul>
+
+<% end %>

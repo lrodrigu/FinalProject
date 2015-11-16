@@ -1,0 +1,28 @@
+<h1>Investor Profile</h1>
+
+<%= link_to "Back to Investor List", investors_path %>
+<%= link_to "Edit", edit_investor_path(@investor) %>
+
+
+<h2><span>Email</span>: <%= @investor.email %></h2>
+<h2><span>Full Name</span>: <%= @investor.full_name %></h2>
+<h2><span>Phone</span>: <%= formatted_phone_number(@investor.phone) %></h2>
+<h2><span>Profile</span>: <%= @investor.profile %></h2>
+<h2><span>Created</span>: <%= time_ago_in_words(@investor.created_at) %></h2>
+
+<h2> Projects </h2>
+
+<ul>
+	<% @projects.each do |project| %>
+		<li><%= project.name %></li>
+	<% end %>
+</ul>
+
+<h2> Interests </h2>
+
+<ul>
+	<% @investor.interests.each do |interest| %>
+		<li><%= interest.name %></li>
+	<% end %>
+</ul>
+

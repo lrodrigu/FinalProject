@@ -1,0 +1,32 @@
+<div class="row">
+	<div class="col-md-12">
+		<h1>Investor List</h1>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-9">
+
+		<%= link_to "Add new Investor", new_investor_path %>
+
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Email</th>
+					<th>Investor Name</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @investors.each do |investor| %>
+					<tr>
+						<td><%= link_to investor.email, investor_path(investor) %></td>
+						<td><%= investor.full_name %></td>
+						<td><%= button_to "Delete", investor_path(investor), :method=> :delete, :class=> :destroy, :confirm=> "Are you sure?" %></td>
+					</tr>
+				<% end %>
+
+			</tbody>		
+		</table>
+	</div>
+</div>

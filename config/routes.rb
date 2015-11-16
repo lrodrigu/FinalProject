@@ -1,11 +1,17 @@
 Rails.application.routes.draw do
-	resources :students
+  devise_for :users
+
+  	devise_scope :user do
+  		get "sign_in", to: "devise/sessions#new"
+  	end
+
+	resources :investors
  	resources :projects
 
  	get '/search', to: 'projects#index'
-  	post '/login', to: 'sessions#create'
-  	get '/login', to: 'sessions#new'
-  	delete '/logout', to: 'sessions#destroy'
+  	# post '/login', to: 'sessions#create'
+  	# get '/login', to: 'sessions#new'
+  	# delete '/logout', to: 'sessions#destroy'
 
   root 'home#show'
 end
